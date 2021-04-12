@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>User</h1>
+<h2 th:text="${user.getLogin()}"></h2>
+
+<h3>New</h3>
+<ul>
+    <li th:each="rec: ${recepies}">
+        <a th:href="${'/'}" th:text="${rec.getRecipe().getTitle()}"></a>
+        <br><span th:if="${rec.isAssigned()}">Is assigned</span><a th:if="${!rec.isAssigned()}" th:href="${'/add?recId='+rec.getRecipe().getId()+'&userId='+user.getId()}">Add</a>
+    </li>
+</ul>
+
+<h3>Assigned</h3>
+<ul>
+    <li th:each="assignedRec: ${user.getRecipes()}">
+        <a th:href="${'/'}" th:text="${assignedRec.getTitle()}"></a> <a th:href="${'/remove?recId='+assignedRec.getId()+'&userId='+user.getId()}">Remove</a>
+    </li>
+</ul>
+
+
+
+</body>
+</html>
